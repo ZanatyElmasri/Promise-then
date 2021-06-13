@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Promisify setTimeout</title>
+</head>
+<body>
+	<h1>Did the promise finish?</h1>
+	<div class="completion">Not yet</div>
+	<script>
+		function wait(argument) {			//this argument will be replaced with number to wait in millisconds
+			return new Promise((resolve,reject) => {
+                console.log(this);
+				window.setTimeout(function() {			// the main idea is here where setTimeout() method force java engine to wait for the specified time you will set 
+					resolve('ok');
+                    console.log(resolve);
+				}, argument);			    //this argument converted into a parameter in the same function has to be same name as agrument 
+			});
+		};
+
+		wait(2000).then(() => {				// here i call wait function changed the argument with number of about 2 seconds after that then function comes
+			let  completion = document.querySelector('.completion');
+			completion.remove();
+		})
+		wait(5000).then(()=> {				// again wait function but takes 5 around seconds that then function comes
+			let hansol = document.createElement('p');
+			document.body.appendChild(hansol);
+			hansol.textContent = "This is a new Element Created By davaScript"
+		})
+	</script>
+</body>
+</html>
